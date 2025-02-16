@@ -1,40 +1,41 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { DashboardItemComponent } from "../dashboard-item/dashboard-item.component";
 
 @Component({
-  selector: 'app-server-traffic',
+  selector: "app-server-traffic",
   standalone: true,
-  imports: [],
-  templateUrl: './server-traffic.component.html',
-  styleUrl: './server-traffic.component.css'
+  imports: [DashboardItemComponent],
+  templateUrl: "./server-traffic.component.html",
+  styleUrl: "./server-traffic.component.css",
 })
 export class ServerTrafficComponent {
   dummyTrafficData = [
     {
-      id: 'd1',
+      id: "d1",
       value: 433,
     },
     {
-      id: 'd2',
+      id: "d2",
       value: 260,
     },
     {
-      id: 'd3',
+      id: "d3",
       value: 290,
     },
     {
-      id: 'd4',
+      id: "d4",
       value: 410,
     },
     {
-      id: 'd5',
+      id: "d5",
       value: 397,
     },
     {
-      id: 'd6',
+      id: "d6",
       value: 488,
     },
     {
-      id: 'd47',
+      id: "d47",
       value: 589,
     },
   ];

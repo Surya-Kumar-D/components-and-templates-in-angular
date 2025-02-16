@@ -1,13 +1,12 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from "@angular/core";
+import { ButtonComponent } from "../button/button.component";
 
 @Component({
-  selector: 'app-header',
+  selector: "app-header",
   standalone: true,
-  imports: [],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.css',
-  encapsulation: ViewEncapsulation.None
+  imports: [ButtonComponent],
+  templateUrl: "./header.component.html",
+  styleUrl: "./header.component.css",
+  encapsulation: ViewEncapsulation.None,
 })
-export class HeaderComponent {
-
-}
+export class HeaderComponent {}

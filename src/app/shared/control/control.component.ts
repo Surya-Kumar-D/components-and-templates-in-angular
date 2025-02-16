@@ -1,4 +1,10 @@
-import { Component, Input, ViewEncapsulation } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  Input,
+} from "@angular/core";
 
 @Component({
   selector: "app-control",
@@ -9,4 +15,13 @@ import { Component, Input, ViewEncapsulation } from "@angular/core";
 })
 export class ControlComponent {
   @Input({ required: true }) label!: string;
+  private elementRef = inject(ElementRef);
+
+  @HostListener("click") onClick() {
+    console.log(this.elementRef.nativeElement);
+  }
+  @HostListener("mouseenter", ["$event.target"])
+  onMouseEnter(target: HTMLElement) {
+    console.log(target);
+  }
 }

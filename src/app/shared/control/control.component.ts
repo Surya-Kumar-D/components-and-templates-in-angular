@@ -1,4 +1,14 @@
-import {Component, ElementRef, inject, Input, ViewChild, ContentChildren, HostListener, QueryList} from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  inject,
+  Input,
+  ViewChild,
+  ContentChildren,
+  HostListener,
+  QueryList,
+  OnInit
+} from "@angular/core";
 
 @Component({
   selector: "app-control",
@@ -7,10 +17,12 @@ import {Component, ElementRef, inject, Input, ViewChild, ContentChildren, HostLi
   templateUrl: "./control.component.html",
   styleUrl: "./control.component.css",
 })
-export class ControlComponent {
+export class ControlComponent  {
   @Input({ required: true }) label!: string;
   @ContentChildren('title, request', { descendants: true }) inputs!: QueryList<ElementRef<HTMLInputElement | HTMLTextAreaElement>>;
   private elementRef = inject(ElementRef);
+
+
 
 
   @HostListener("click") onClick() {

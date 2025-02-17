@@ -1,4 +1,18 @@
-import {Component, ElementRef, OnChanges, SimpleChanges, ViewChild, HostListener, viewChild} from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+  HostListener,
+  viewChild,
+  OnInit,
+  AfterViewInit,
+  afterNextRender,
+  afterRender,
+  Output,
+  EventEmitter,
+} from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ButtonComponent } from "../../button/button.component";
 import { ControlComponent } from "../../../shared/control/control.component";
@@ -10,26 +24,44 @@ import { ControlComponent } from "../../../shared/control/control.component";
   templateUrl: "./new-ticket.component.html",
   styleUrl: "./new-ticket.component.css",
 })
-export class NewTicketComponent implements OnChanges {
-  @ViewChild('form') form!: ElementRef<HTMLFormElement>;
-  @ViewChild('title') title!: ElementRef<HTMLInputElement>;
-  @ViewChild('request') request!: ElementRef<HTMLTextAreaElement>;
+export class NewTicketComponent implements OnChanges, OnInit, AfterViewInit {
+  @ViewChild("form") form!: ElementRef<HTMLFormElement>;
+  @ViewChild("title") title!: ElementRef<HTMLInputElement>;
+  @ViewChild("request") request!: ElementRef<HTMLTextAreaElement>;
 
-  @ViewChild(ButtonComponent) private buttonComponent!: ButtonComponent ;
+  @ViewChild(ButtonComponent) private buttonComponent!: ButtonComponent;
+
+  @Output() add = new EventEmitter<{ title: string; request: string }>();
+
+  constructor() {
+    afterNextRender(() => {
+      console.log("After Next Render");
+    })
+    afterRender(() => {
+      console.log("After Render")
+    })
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
   }
 
-  @HostListener("click") onClick() {
-    this.request.nativeElement.value ='';
-    console.log(this.buttonComponent);
+
+
+  ngOnInit(): void {
+    console.log(this.form);
   }
 
+  ngAfterViewInit(): void {
+    const formData = new FormData(this.form.nativeElement);
+    console.log(formData);
+    console.log(this.form);
+  }
+
+  @HostListener("click") onClick() { }
+
   onSubmit(title: HTMLInputElement, request: HTMLTextAreaElement) {
-    console.log(title.value, request.value);
-   // this.form?.nativeElement.reset();
-   this.title.nativeElement.value = "";
-   this.request.nativeElement.value = "";
+    this.add.emit({ title: title.value, request: request.value })
+
   }
 }

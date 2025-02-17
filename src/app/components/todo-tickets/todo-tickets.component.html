@@ -1,9 +1,20 @@
+<div id="tickets">
+  <ul>
+    @for(ticket of tickets; track ticket.id){
+       <li><app-ticket [data]="ticket"/></li>
+    }@empty {
+      <p>There is no ticket currently opened.</p>
+    }
+  </ul>
+
+
 <app-dashboard-item
   iconsSrc="list.png"
   iconAlt="A list of items"
   title="Todo Tickets"
 >
   <div class="new-ticket">
-    <app-new-ticket></app-new-ticket>
+    <app-new-ticket (add)="onAdd($event)"></app-new-ticket>
   </div>
 </app-dashboard-item>
+</div>

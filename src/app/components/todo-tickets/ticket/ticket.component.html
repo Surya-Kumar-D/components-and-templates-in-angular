@@ -2,8 +2,8 @@
     <h3>
         <div
             [class]="{
-                'ticket-open': isOpened(),
-                'ticket-closed': !isOpened(),
+                'ticket-open': data.status === 'open',
+                'ticket-closed': data.status === 'closed'
             }"
         ></div>
         <button (click)="onToggle()">
@@ -12,7 +12,7 @@
                 @if (isOpened()) {
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
+                        fill="none"z
                         viewBox="0 0 24 24"
                         stroke-width="1.5"
                         stroke="currentColor"
@@ -46,7 +46,7 @@
         <p>{{ data.request }}</p>
 
         @if (data.status === "open") {
-            <p><button>Mark as completed</button></p>
+            <p><button (click)="marAsComplete(data.id)" >Mark as completed</button></p>
         }
     }
 </article>

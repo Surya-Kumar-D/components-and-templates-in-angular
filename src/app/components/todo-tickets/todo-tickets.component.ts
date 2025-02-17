@@ -18,4 +18,12 @@ export class TodoTicketsComponent  {
    this.tickets.push({id: `ticket-${this.tickets.length}`, request: event.request, title: event.title, status:'open'})  
   console.log(this.tickets)
   }
+
+  onToggleStatus(id: string) {
+    const ticket = this.tickets.find((ticket) => ticket.id === id)!;
+    if (ticket) {
+      ticket.status = ticket.status === "open" ? "closed" : "open";
+    }
+  }
+
 }

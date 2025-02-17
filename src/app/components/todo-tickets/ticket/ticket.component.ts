@@ -1,4 +1,4 @@
-import {Component, Input, signal} from '@angular/core';
+import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
 import {Ticket} from "../todo-tickets.model";
 
 @Component({
@@ -10,12 +10,15 @@ import {Ticket} from "../todo-tickets.model";
 })
 export class TicketComponent {
     @Input({required: true}) data!: Ticket;
-
+    @Output() statusChange = new EventEmitter<string>();
     isOpened = signal(false);
 
     onToggle() {
       this.isOpened.set(!this.isOpened());
     }
 
-    protected readonly onclick = onclick;
+    marAsComplete(id: string){
+        this.statusChange.emit(id);
+    }
+
 }

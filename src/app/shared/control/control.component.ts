@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  inject,
-  Input,
-} from "@angular/core";
+import {Component, ElementRef, inject, Input, ViewChild, ContentChildren, HostListener, QueryList} from "@angular/core";
 
 @Component({
   selector: "app-control",
@@ -15,13 +9,17 @@ import {
 })
 export class ControlComponent {
   @Input({ required: true }) label!: string;
+  @ContentChildren('title, request', { descendants: true }) inputs!: QueryList<ElementRef<HTMLInputElement | HTMLTextAreaElement>>;
   private elementRef = inject(ElementRef);
 
+
   @HostListener("click") onClick() {
-    console.log(this.elementRef.nativeElement);
+    console.log(this?.inputs)
   }
-  @HostListener("mouseenter", ["$event.target"])
-  onMouseEnter(target: HTMLElement) {
-    console.log(target);
-  }
+  // @HostListener("mouseenter", ["$event.target"])
+  // onMouseEnter(target: HTMLElement) {
+  //   console.log(target);
+  // }
+
+
 }
